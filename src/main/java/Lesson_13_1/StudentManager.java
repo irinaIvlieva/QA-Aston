@@ -3,9 +3,15 @@ package Lesson_13_1;
 import java.util.Set;
 
 public class StudentManager {
+    private Set<Student> students;
 
-    public static void removeUnderperformingStudents(Set<Student> students) {
-        System.out.println("\n Отчисление студентов со средним баллом < 3");
+    public StudentManager(Set<Student> students) {
+        this.students = students;
+    }
+
+    public void removeUnderperformingStudents() {
+        System.out.println("\nОтчисление студентов со средним баллом < 3");
+
         students.removeIf(student -> {
             if (student.getAverageGrade() < 3) {
                 System.out.println(student.getName() + " отчислен (средний балл: " +
@@ -16,15 +22,22 @@ public class StudentManager {
         });
     }
 
-    public static void promoteStudents(Set<Student> students) {
+    public void promoteStudents() {
         System.out.println("\n Перевод студентов на следующий курс");
         for (Student student : students) {
+            int oldCourse = student.getCourse();  // Запоминаем текущий курс
             student.promoteToNextCourse();
+
+            if (oldCourse != student.getCourse()) {
+                System.out.println(student.getName() + " переведён с " + oldCourse +
+                        " на " + student.getCourse() + " курс");
+            }
         }
     }
 
-    public static void printStudents(Set<Student> students, int course) {
+    public void printStudents(int course) {  // <- Убран параметр Set<Student>
         System.out.println("\n Студенты " + course + " курса");
+
         for (Student student : students) {
             if (student.getCourse() == course) {
                 System.out.println(student.getName() + " (группа: " + student.getGroup() +

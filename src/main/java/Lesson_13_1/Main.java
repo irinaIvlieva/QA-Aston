@@ -15,18 +15,18 @@ public class Main {
         students.add(new Student("Анатолий", "Группа 3", 3,
                 Map.of("Литература", 4, "Философия", 5, "История", 3)));
 
+        StudentManager manager = new StudentManager(students);
+
         System.out.println(" Все студенты");
         students.forEach(System.out::println);
 
-        StudentManager.promoteStudents(students);
-
-        StudentManager.removeUnderperformingStudents(students);
+        manager.promoteStudents();
+        manager.removeUnderperformingStudents();
 
         System.out.println("\n Оставшиеся студенты");
         students.forEach(System.out::println);
 
-
-        StudentManager.printStudents(students, 4);
+        manager.printStudents(4);
     }
 }
 
